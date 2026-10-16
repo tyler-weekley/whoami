@@ -1,0 +1,17 @@
+version: 1
+environment:
+  packages:
+    - go
+checks:
+  build:
+    cmd: go build -o /tmp/whoami .
+    network:
+      egress: [proxy.golang.org, sum.golang.org]
+  vet:
+    cmd: go vet ./...
+    network:
+      egress: [proxy.golang.org, sum.golang.org]
+  test:
+    cmd: go test -v -cover ./...
+    network:
+      egress: [proxy.golang.org, sum.golang.org]
